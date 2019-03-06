@@ -1,6 +1,9 @@
 # NDN - Notification Delivery Network
 
 ---
+atualizar o flare dizendo que esse projeto é a atualização dele.
+
+---
 habilitar tudo por api
 
 ---
@@ -44,6 +47,14 @@ GET  /outputs/http.pull/notifications?entity=product&id=123&version=456
 GET  /outputs/http.pull/notifications/checkpoint # exibe a id do ultimo registro processado
 POST /outputs/http.pull/notifications/checkpoint # armazena a id do ultimo registro processado
 
+# podemos ter casos mais complexos de input também
+PUT /inputs/kinesis-products # pode desligar
+PUT /inputs/kinesis-products/settings
+  {"read": "tipo de leitura do kinesis"}
+PUT /inputs/kinesis-products/offset
+  {shard: "", offset: ""}
+
+
 ---
 notifications # guarda todas as notificações
 outputs # guarda todos os outputs
@@ -54,20 +65,10 @@ quando o menor valor avançar, fazer o cleanup.
 ---
 criar uma tarefa que avisa quem está atrasado em 1 channel
 
+---
+podemos pausar os inputs e outputs
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 - recebemos as mensagens de alteracao e notificacao
 - enviamos para outro servidor
 
@@ -91,3 +92,15 @@ Assim que algo tiver que ser expirado, vamos no servidor e fazemos a expiração
 
 
 as apis chamam enviando os dados
+
+
+---
+docker run --rm --name ndn-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres postgres:11.2
+
+---
+alguns inputs tem que ser sequenciais outros não, logo não podem funcionar em cluster mode.
+eleger o master pra poder fazer o dispatch das funções.
+
+---
+se não tiver nenhum output, ignorar o input.
+criar uma tabela de cache pra fazer isso.

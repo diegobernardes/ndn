@@ -12,6 +12,24 @@ var (
 	OutputKindHTTPPull = "http.pull"
 )
 
+// Kinds of input/output status.
+var (
+	IOStatusEnabled   = "enabled"
+	IOStatusDisabled  = "disabled"
+	IOStatusDisabling = "disabling"
+)
+
+type Input struct {
+	Kind   string
+	Status string
+}
+
+type Output struct {
+	Kind   string
+	Status string
+	Entity string
+}
+
 // Notification holds the value to represent a notification.
 type Notification struct {
 	Entity  string

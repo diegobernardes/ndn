@@ -3,7 +3,7 @@ package notification
 import (
 	"context"
 
-	"github.com/diegobernardes/ndn"
+	"ndn"
 )
 
 type Pusher struct {
